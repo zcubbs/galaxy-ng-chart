@@ -4,4 +4,4 @@ metadata:
   name: galaxy-ng-cm
 data:
   settings.py: |-
-  {{ .Values.settings | indent 4 }}
+  {{ .Values.settings }}
