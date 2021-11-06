@@ -3,14 +3,14 @@ entries:
   galaxy-ng-chart:
   - apiVersion: v2
     appVersion: 4.3.3
-    created: "2021-11-06T19:40:40.178411039Z"
+    created: "2021-11-06T21:19:50.321037357Z"
     description: Galaxy NG Helm chart for Kubernetes
-    digest: 9e33701ca6106bf604a88907ecae13069581167aff599671c6be58fe4400be73
+    digest: d4673cb32696b405de4b6b3d4d069bd58fe038a6fe3ab21c1e6df1697f339747
     name: galaxy-ng-chart
     type: application
     urls:
-    - https://github.com/zcubbs/galaxy-ng-chart/releases/download/galaxy-ng-chart-0.0.4/galaxy-ng-chart-0.0.4.tgz
-    version: 0.0.4
+    - https://github.com/zcubbs/galaxy-ng-chart/releases/download/galaxy-ng-chart-0.0.5/galaxy-ng-chart-0.0.5.tgz
+    version: 0.0.5
   - apiVersion: v2
     appVersion: 4.3.3
     created: "2021-11-06T20:25:50.7918767+01:00"
@@ -31,4 +31,4 @@ entries:
     urls:
     - https://zcubbs.github.io/galaxy-ng-chart/releases/galaxy-ng-chart-0.0.1.tgz
     version: 0.0.1
-generated: "2021-11-06T19:40:40.178428239Z"
+generated: "2021-11-06T21:19:50.321060457Z"
