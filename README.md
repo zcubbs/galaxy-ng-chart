@@ -2,7 +2,7 @@
 
 ### Package chart
 ```bash
-helm package ./chart -d ./docs/releases
+helm package ./charts/galaxy-ng -d ./docs/releases
 helm repo index ./docs --url https://zcubbs.github.io/galaxy-ng-chart
 ```
 ### Add Helm repo
