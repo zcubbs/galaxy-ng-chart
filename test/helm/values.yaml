@@ -1,0 +1,10 @@
+---
+persistence:
+  enabled: true
+  size: 2Gi
+
+settings: |-
+  CONTENT_ORIGIN='https://galaxy.localhost'
+  ANSIBLE_API_HOSTNAME='https://galaxy.localhost'
+  ANSIBLE_CONTENT_HOSTNAME='http://galaxy.localhost/pulp/content'
+  TOKEN_AUTH_DISABLED=True
