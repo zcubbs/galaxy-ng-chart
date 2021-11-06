@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: galaxy-ng
+  namespace: galaxy-ng
+  labels:
+    app: galaxy-ng
+spec:
+  {{- if .Values.replicas }}
+  replicas: {{ .Values.replicas }}
+  {{- else }}
+  replicas: 1
+  {{- end}}
+  template:
+    metadata:
+      name: galaxy-ng
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        app: galaxy-ng
+    spec:
+      {{- if .Values.volumePermissions.enabled }}
+      securityContext:
+        fsGroup: {{ .Values.volumePermissions.fsGroup }}
+      {{- end}}
+      containers:
+        - name: galaxy-ng
+          image: {{ .Values.image }}:{{ .Values.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          volumeMounts:
+            - mountPath: /etc/pulp/settings.py
+              subPath: settings.py
+              name: galaxy-ng-settings
+            {{- if .Values.persistence.enabled }}
+            - mountPath: /etc/pulp
+              subPath: pulp
+              name: galaxy-data-volume
+            - mountPath: /var/lib/pulp
+              subPath: pulp
+              name: galaxy-data-volume
+            - mountPath: /var/lib/pgsql
+              subPath: pgsql
+              name: galaxy-data-volume
+            - mountPath: /var/lib/containers
+              subPath: containers
+              name: galaxy-data-volume
+            {{- end}}
+      restartPolicy: Always
+      volumes:
+        - name: galaxy-ng-settings
+          configMap:
+            name: galaxy-ng-cm
+        {{- if .Values.persistence.enabled }}
+        - name: galaxy-data-volume
+          persistentVolumeClaim:
+            claimName: galaxy-ng-pvc
+        {{- end}}
+      {{- if .Values.imagePullSecretName }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecretName }}
+      {{- end}}
+  selector:
+    matchLabels:
+      app: galaxy-ng

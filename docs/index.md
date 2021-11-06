@@ -1,10 +1,9 @@
-# Galaxy NG Helm Chart
+---
+layout: default
+title: Galaxy NG Helm Chart Repo
+food: pears
+---
 
-### Package chart
-```bash
-helm package ./chart -d ./docs/releases
-helm repo index ./docs --url https://zcubbs.github.io/galaxy-ng-chart
-```
 ### Add Helm repo
 ```bash
 helm repo add galaxy-ng https://zcubbs.github.io/galaxy-ng-chart

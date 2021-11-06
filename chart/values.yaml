@@ -1,0 +1,17 @@
+persistence:
+  enabled: true
+  storageClass: ""
+  size: 2Gi
+volumePermissions:
+  enabled: true
+  fsGroup: 2000
+image: pulp/pulp-galaxy-ng
+tag: latest
+imagePullPolicy: IfNotPresent
+# imagePullSecretName: <secretName>
+replicas: 1
+settings: |-
+  CONTENT_ORIGIN='http://galaxy.localhost'
+  ANSIBLE_API_HOSTNAME='http://galaxy.localhost'
+  ANSIBLE_CONTENT_HOSTNAME='http://galaxy.localhost/pulp/content'
+  TOKEN_AUTH_DISABLED=True

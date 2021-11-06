@@ -1,0 +1,11 @@
+---
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+  namespace: awx
+spec:
+  deployment_type: awx
+  ingress_type: none
+  hostname: awx.localhost
+  admin_user: admin

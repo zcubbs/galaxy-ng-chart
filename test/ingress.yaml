@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: galaxy-ng
+  namespace: galaxy-ng
+spec:
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`galaxy.localhost`)
+      services:
+        - name: galaxy-ng
+          port: 80

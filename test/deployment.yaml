@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: galaxy-ng
+  namespace: galaxy-ng
+  labels:
+    app: galaxy-ng
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: galaxy-ng
+      labels:
+        app: galaxy-ng
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+        - name: galaxy-ng
+          image: pulp/pulp-galaxy-ng
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /etc/pulp/settings.py
+              subPath: settings.py
+              name: galaxy-ng-settings
+            - mountPath: /etc/pulp
+              subPath: pulp
+              name: galaxy-data-volume
+            - mountPath: /var/lib/pulp
+              subPath: pulp
+              name: galaxy-data-volume
+            - mountPath: /var/lib/pgsql
+              subPath: pgsql
+              name: galaxy-data-volume
+            - mountPath: /var/lib/containers
+              subPath: containers
+              name: galaxy-data-volume
+      restartPolicy: Always
+      volumes:
+        - name: galaxy-ng-settings
+          configMap:
+            name: galaxy-ng-cm
+        - name: galaxy-data-volume
+          persistentVolumeClaim:
+            claimName: galaxy-ng-pvc
+  selector:
+    matchLabels:
+      app: galaxy-ng

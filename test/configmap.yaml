@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: galaxy-ng-cm
+  namespace: galaxy-ng
+data:
+  settings.py: |-
+    CONTENT_ORIGIN='http://galaxy.localhost'
+    ANSIBLE_API_HOSTNAME='http://galaxy.localhost'
+    ANSIBLE_CONTENT_HOSTNAME='http://galaxy.localhost/pulp/content'
+    TOKEN_AUTH_DISABLED=True
