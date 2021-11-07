@@ -1,5 +1,7 @@
 # Galaxy NG Helm Chart
 
+Helm Chart wrapping Ansible Galaxy NG (pulp) https://github.com/ansible/galaxy_ng. 
+
 ### Package chart
 ```bash
 helm package ./charts/galaxy-ng -d ./docs/releases
